@@ -1,13 +1,155 @@
+html {
+    position: fixed;
+    overflow: hidden;
+}
+
+body {
+    background-color: black;
+    background-image: url(./assets/images/Number-Map_matrix3end_12fps.gif);
+    background-position: center;
+    height: 100vh;
+    font-size: 16px;
+    overflow-y: scroll;
+}
+
+.App {
+    width: 80vw;
+    margin: 0 10vw;
+}
+
+/* Border Styles */
+
+.transfer-wrap, .banner {
+    border: outset 4px gray;
+    background-color: gray;
+}
+
+.error-msg {
+    color: red;
+    padding: 1rem;
+    text-align: center;
+}
+
+.alert {
+    border: outset 4px black;
+    background-color: black;
+    color: white;
+}
+
+/* Intro Section */
+
+.intro {
+    color: white;
+    text-align: center;
+}
+
+/* Transfer Form Section */
+
+.transfer-wrap {
+    background-image: url(./assets/images/blue-liquid.gif);
+    background-size: cover;
+    background-position: bottom;
+}
+
+.transfer-wrap, .alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-wrap {
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+}
+
+form, .form-wrap img {width: 100%;}
+
+@media screen and (min-width: 1000px) {
+    .form-wrap {flex-direction: row;}
+}
+
+label {
+    display: inline-block;
+    margin-right: 0.5rem;
+    width: 25%;
+    box-sizing: border-box;
+}
+
+input {margin-bottom: 1rem;}
+
+input[type="password"],
+input[type="text"] {
+    border-radius: 0;
+    width: calc(75% - 0.5rem);
+    box-sizing: border-box;
+}
+
+input[type="submit"],
+input[type="text"],
+label,
+.button {color: white;}
+
+input[type="submit"],
+.button {
+    background-image: linear-gradient(rgb(255, 255, 255) 0%, rgb(212, 32, 12) 31%);
+    border: groove 3px rgb(153, 23, 8);
+    padding: 0.75em 2em;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+input[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Progress Bar */
+
+.tracker-wrap {
+    position: relative;
+    height: 200px;
+    top: calc((200px - 30px) / 2);
+}
+
 .tracker {
-    width: 500px;
-    background-color: red;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 0 15px white;
 }
 
 .tracker,
 .progress {
-    height: 20px;
+    height: 30px;
+    border-radius: 50px;
 }
 
 .progress {
-    background-color: black;
+    background-color: rgb(212, 32, 12);
+    background-image: linear-gradient(rgb(255, 255, 255) 0%, rgb(212, 32, 12) 31%);
+    color: white;
+    text-align: center;
+    line-height: 30px;
 }
+
+/* Alert */
+
+.alert {
+    position: absolute;
+    width: 150px;
+    max-width: calc(100% - (55% + 10vw));
+    box-sizing: border-box;
+}
+
+.alert button {
+    display: block;
+    float: right;
+}
+
+/* Banners */
+
+img {
+    width: 100%;
+    display: block;
+}
+
+.banner {margin: 1rem 0;}
