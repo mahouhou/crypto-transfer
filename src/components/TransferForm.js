@@ -31,7 +31,8 @@ function TransferForm() {
   function handleSubmit(e) {
     e.preventDefault();
     state.startProgress = true;
-    //updates startProgress state to true once the submit button has been clicked ?
+    //updates startProgress state to true
+    //once the submit button has been clicked
   }
   return (
     <div className="form-wrap">

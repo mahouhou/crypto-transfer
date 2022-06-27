@@ -4,7 +4,7 @@ import { useSnapshot } from 'valtio';
 import state from '../State';
 import ErrorBoundary from './ErrorBoundary';
 
-const alertBatch = [2, 4, 3, 12, 6]
+const alertBatch = [2, 4, 3, 12, 6];
 //the number of pop ups to be opened during each sequence
 
 function ProgressBar() {
@@ -21,21 +21,28 @@ function ProgressBar() {
   const [tempBatch, setTempBatch] = useState([-1]);
   //tempBatch state starts with an array containing -1 (not 0)
   //state updated during the useEffect - every time batchNumber changes
+  //tempBatch contains data for open alerts
+  const [progressBar, setProgressBar] = useState(0);
 
   useEffect(() => {
-    let x = 0;
-    let temp = [];
-    //batchNumber state keeps track of which alert batch we are on
-    for (let i = 0; i < alertBatch[batchNumber]; i++) {
-      //push() adds new item to the end of an array
-      //and returns the new length
-      //pushes that batch of items from data to temp
-      temp.push(data[batchNumber][x]);
-      // console.log(data[batchNumber][x]);
-      x++
-    }
-    //tempBatch state is updated with batch data
-    setTempBatch(temp)
+    function Delay() {
+      let x = 0;
+      let temp = [];
+      //batchNumber state keeps track of which alert batch we are on
+      for (let i = 0; i < alertBatch[batchNumber]; i++) {
+        //push() adds new item to the end of an array
+        //and returns the new length
+        //each time for loop iterates,
+        //push data in sequence and increment x
+        //until all items from that batch have been pushed to temp
+        temp.push(data[batchNumber][x])
+        // console.log(data[batchNumber][x]);
+        x++
+      };
+      //tempBatch state is updated with batch data
+      setTempBatch(temp)
+      }
+    setTimeout(Delay, 1000)
   }, [batchNumber])
   //when batch number changes, useEffect will run -
   //does this mean it runs as soon as the last useEffect has finished ?
@@ -44,13 +51,17 @@ function ProgressBar() {
   //the length of temp is equal to the batchNumber state
 
   useEffect(() => {
-    if (snap.startProgress) {
-      setProgress(
-        prevState => prevState + 0
-      )
+    function Delay() {
       setShowAlert(
         prevState => !prevState
       )
+    }
+    if (snap.startProgress) {
+      // setProgress(
+      //   prevState => prevState + (100 / 27)
+      // );
+      setProgressBar(100 / 27);
+      setTimeout(Delay, 1000)
     }
   }, [snap.startProgress])
   //array of dependance, the things that the useEffect depends on
@@ -60,6 +71,7 @@ function ProgressBar() {
 
   useEffect(() => {
     if (tempBatch.length === 0) {
+      setProgressBar(progress);
       setBatchNumber(prev => prev + 1)
     }
   }, [tempBatch])
@@ -68,14 +80,15 @@ function ProgressBar() {
   //pushes the alertBatch onto the next number in the array
 
   function handleAlert() {
+  //function called by x button
     setProgress(
       prevState => prevState + (100 / 27)
+      //progress increases by closing alerts
     )
     let temp = [...tempBatch];
     //copy contents of tempBatch into temp
     temp.pop();
-    //pop() method removes the last item from an array
-    //and returns it
+    //pop() method removes the last item (closed alert batch data) from array
     setTempBatch(temp)
   }
   //when handleAlert is called, progress also increases by 10% ?
@@ -83,7 +96,9 @@ function ProgressBar() {
   return (
     <div className="tracker-wrap">
       <div className="tracker">
-        <div className="progress" style={{ width: `${progress}%` }}>{Math.round(progress)}%</div>
+        <div className="progress" style={{ width: `${progressBar}%` }}>
+          {Math.round(progressBar)}%
+        </div>
         {/* width of progress div is equal to progress state as a percentage ? */}
       </div>
       {tempBatch.map(text => <ErrorBoundary><Alert

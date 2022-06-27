@@ -129,6 +129,7 @@ input[disabled] {
     color: white;
     text-align: center;
     line-height: 30px;
+    transition: width linear 1s;
 }
 
 /* Alert */
