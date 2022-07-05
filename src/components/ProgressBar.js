@@ -8,11 +8,10 @@ const alertBatch = [2, 4, 3, 12, 6];
 //the number of pop ups to be opened during each sequence
 
 function ProgressBar() {
-  const [progress, setProgress] = useState(0);
-  //progress state starts at 0%
-  //setProgress is used to increase the progress once popups have been closed
+  const [count, setCount] = useState(0);
+  //count starts at 0
   const [batchNumber, setBatchNumber] = useState(0);
-  //batch number state starts at 0 - the first number in the array ?
+  //batch number state starts at 0 - the first item in alertBatch[]
   const [showAlert, setShowAlert] = useState(false);
   //showAlert state is initially set to false i.e. not visible
   //setShowAlert is used to make Alert visible
@@ -21,8 +20,63 @@ function ProgressBar() {
   const [tempBatch, setTempBatch] = useState([-1]);
   //tempBatch state starts with an array containing -1 (not 0)
   //state updated during the useEffect - every time batchNumber changes
-  //tempBatch contains data for open alerts
+  //tempBatch receives data for open alerts
   const [progressBar, setProgressBar] = useState(0);
+  //new progress state with equal increments between batches
+
+  function CountUp() {setCount(prev => prev + 1)}
+
+  useEffect(() => {
+    function Delay() {
+      setShowAlert(
+        prevState => !prevState
+      )
+      clearInterval(CountUp)
+    }
+    if (snap.startProgress) {
+      // setProgress(
+      //   prevState => prevState + (100 / 27)
+      // );
+      //if progress has started, increase progress bar
+      setProgressBar(100 / 6);
+      //!! call Counter function for the first time here
+      //!! count up to progressBar
+      setInterval(CountUp, (1000 / 20));
+      //wait 1s to allow for progress bar to grow
+      //before showing popups
+      setTimeout(Delay, 1000)
+    }
+  }, [snap.startProgress])
+  //if the submit button has been clicked, then startProgress starts
+  //therefore progressBar state increases and Alert becomes visible
+
+  function handleAlert() {
+  //function called by x button on alerts
+    // setProgress(
+    //   prevState => prevState + (100 / 27)
+    //   //progress increases by closing alerts
+    // )
+    let temp = [...tempBatch];
+    //copy contents of tempBatch into temp
+    temp.pop();
+    //pop() method removes the last item (closed alert batch data) from array
+    setTempBatch(temp)
+  }
+
+  useEffect(() => {
+    //progress bar increases with each new alert batch
+    if (tempBatch.length === 0) {
+      if (progressBar < 100) {
+        setProgressBar(prev => prev + (100 / 6));
+      }
+      //!! Call Counter again here for all subsquent alert batches
+      // setProgressBar(progress);
+      setBatchNumber(prev => prev + 1)
+    }
+  }, [tempBatch])
+  //when tempBatch changes, useEffect runs and checks if equal to 0
+  //new batchNumber is 1 more than the last state which
+  //pushes the alertBatch onto the next number in the array
 
   useEffect(() => {
     function Delay() {
@@ -42,64 +96,25 @@ function ProgressBar() {
       //tempBatch state is updated with batch data
       setTempBatch(temp)
       }
+    //get popup data 1s after batchNumber changes
+    //to allow for progress bar to increase
     setTimeout(Delay, 1000)
   }, [batchNumber])
-  //when batch number changes, useEffect will run -
-  //does this mean it runs as soon as the last useEffect has finished ?
+  //when batch number changes, useEffect will run
+  //and gather the next set of popups
   //setBatchNumber depends how many loops the for/loop iterates through
   //each time it loops, a 1 is pushed to temp array
   //the length of temp is equal to the batchNumber state
 
-  useEffect(() => {
-    function Delay() {
-      setShowAlert(
-        prevState => !prevState
-      )
-    }
-    if (snap.startProgress) {
-      // setProgress(
-      //   prevState => prevState + (100 / 27)
-      // );
-      setProgressBar(100 / 27);
-      setTimeout(Delay, 1000)
-    }
-  }, [snap.startProgress])
-  //array of dependance, the things that the useEffect depends on
-  //when anything inside the array changes, the useEffect runs
-  //in this case, if the submit button has been clicked, then startProgress starts ?
-  //progress state increases by 10% and Alert becomes visible ?
-
-  useEffect(() => {
-    if (tempBatch.length === 0) {
-      setProgressBar(progress);
-      setBatchNumber(prev => prev + 1)
-    }
-  }, [tempBatch])
-  //when tempBatch changes, useEffect runs and checks if equal to 0
-  //new batchNumber is 1 more than the last state which
-  //pushes the alertBatch onto the next number in the array
-
-  function handleAlert() {
-  //function called by x button
-    setProgress(
-      prevState => prevState + (100 / 27)
-      //progress increases by closing alerts
-    )
-    let temp = [...tempBatch];
-    //copy contents of tempBatch into temp
-    temp.pop();
-    //pop() method removes the last item (closed alert batch data) from array
-    setTempBatch(temp)
-  }
-  //when handleAlert is called, progress also increases by 10% ?
-
   return (
     <div className="tracker-wrap">
+      <div style={{color: "white"}}>{count}</div>
       <div className="tracker">
+        {/* width of progress div is equal to progressBar state as a percentage */}
         <div className="progress" style={{ width: `${progressBar}%` }}>
+          {/* !! display new count state here */}
           {Math.round(progressBar)}%
         </div>
-        {/* width of progress div is equal to progress state as a percentage ? */}
       </div>
       {tempBatch.map(text => <ErrorBoundary><Alert
         index={tempBatch.indexOf(text)}
@@ -109,9 +124,8 @@ function ProgressBar() {
         key={text}
       /></ErrorBoundary>)}
       {/* status and handleAlert are props that get passed to Alert.js 
-      handleAlert gets called when X button is clicked ? */}
+      handleAlert gets called when X button is clicked */}
       {/* number of Alerts created depends on tempBatch state */}
-      {/* {tempBatch.length} */}
     </div>
   );
 }
