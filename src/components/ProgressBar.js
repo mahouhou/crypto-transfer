@@ -24,14 +24,14 @@ function ProgressBar() {
   const [progressBar, setProgressBar] = useState(0);
   //new progress state with equal increments between batches
 
-  function CountUp() {setCount(prev => prev + 1)}
+  let interval = null;
+  function CountUp() {setCount((prev) => prev + 1);}
+  function StopCount() {clearInterval(interval);}
 
   useEffect(() => {
-    function Delay() {
-      setShowAlert(
-        prevState => !prevState
-      )
-      clearInterval(CountUp)
+    function ShowAlert() {
+      StopCount();
+      setShowAlert((prevState) => !prevState);
     }
     if (snap.startProgress) {
       // setProgress(
@@ -41,10 +41,11 @@ function ProgressBar() {
       setProgressBar(100 / 6);
       //!! call Counter function for the first time here
       //!! count up to progressBar
-      setInterval(CountUp, (1000 / 20));
+      setCount(4);
+      interval = setInterval(CountUp, (1000 / (100/6)));
       //wait 1s to allow for progress bar to grow
       //before showing popups
-      setTimeout(Delay, 1000)
+      setTimeout(ShowAlert, 1000);
     }
   }, [snap.startProgress])
   //if the submit button has been clicked, then startProgress starts
@@ -67,11 +68,14 @@ function ProgressBar() {
     //progress bar increases with each new alert batch
     if (tempBatch.length === 0) {
       if (progressBar < 100) {
-        setProgressBar(prev => prev + (100 / 6));
+        setProgressBar((prev) => prev + (100 / 6));
+        interval = setInterval(CountUp, (1000 / (100/6)));
+        setTimeout(StopCount, 1000);
       }
-      //!! Call Counter again here for all subsquent alert batches
       // setProgressBar(progress);
-      setBatchNumber(prev => prev + 1)
+      if (batchNumber < 5) {
+        setBatchNumber((prev) => prev + 1);
+      }
     }
   }, [tempBatch])
   //when tempBatch changes, useEffect runs and checks if equal to 0
@@ -108,12 +112,13 @@ function ProgressBar() {
 
   return (
     <div className="tracker-wrap">
-      <div style={{color: "white"}}>{count}</div>
+      {/* <div style={{color: "white"}}>{count}</div> */}
       <div className="tracker">
         {/* width of progress div is equal to progressBar state as a percentage */}
         <div className="progress" style={{ width: `${progressBar}%` }}>
           {/* !! display new count state here */}
-          {Math.round(progressBar)}%
+          {/* {Math.round(progressBar)}% */}
+          {count}%
         </div>
       </div>
       {tempBatch.map(text => <ErrorBoundary><Alert
