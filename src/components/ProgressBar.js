@@ -41,8 +41,7 @@ function ProgressBar() {
       setProgressBar(100 / 6);
       //!! call Counter function for the first time here
       //!! count up to progressBar
-      setCount(4);
-      interval = setInterval(CountUp, (1000 / (100/6)));
+      interval = setInterval(CountUp, (48));
       //wait 1s to allow for progress bar to grow
       //before showing popups
       setTimeout(ShowAlert, 1000);
@@ -69,7 +68,7 @@ function ProgressBar() {
     if (tempBatch.length === 0) {
       if (progressBar < 100) {
         setProgressBar((prev) => prev + (100 / 6));
-        interval = setInterval(CountUp, (1000 / (100/6)));
+        interval = setInterval(CountUp, (59));
         setTimeout(StopCount, 1000);
       }
       // setProgressBar(progress);
@@ -83,7 +82,7 @@ function ProgressBar() {
   //pushes the alertBatch onto the next number in the array
 
   useEffect(() => {
-    function Delay() {
+    function ShowAlert() {
       let x = 0;
       let temp = [];
       //batchNumber state keeps track of which alert batch we are on
@@ -102,7 +101,7 @@ function ProgressBar() {
       }
     //get popup data 1s after batchNumber changes
     //to allow for progress bar to increase
-    setTimeout(Delay, 1000)
+    setTimeout(ShowAlert, 1000)
   }, [batchNumber])
   //when batch number changes, useEffect will run
   //and gather the next set of popups
