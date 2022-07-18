@@ -1,14 +1,14 @@
-import {useState} from "react";
-import { useSnapshot } from 'valtio';
+// import {useState} from "react";
+// import { useSnapshot } from 'valtio';
 import state from '../State';
 
 function Intro() {
     // const [showForm, setShowForm] = useState(false);
-    const snap = useSnapshot(state);
-    const setShowForm = state.showForm;
+    // const snap = useSnapshot(state);
+    // const setShowForm = state.showForm;
 
     function handleClick() {
-        setShowForm(state.showForm = !state.showForm);
+        state.showForm = !state.showForm;
     };
 
     return (

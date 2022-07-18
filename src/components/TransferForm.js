@@ -31,6 +31,7 @@ function TransferForm() {
   function handleSubmit(e) {
     e.preventDefault();
     state.startProgress = true;
+    state.showForm = false;
     //updates startProgress state to true
     //once the submit button has been clicked
   }

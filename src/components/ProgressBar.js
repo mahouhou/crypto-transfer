@@ -29,24 +29,19 @@ function ProgressBar() {
   function StopCount() {clearInterval(interval);}
 
   useEffect(() => {
+    //if progress has started, increase progress bar
+    setProgressBar((prev) => prev + (100 / 6));
+    //!! call Counter function for the first time here
+    //!! count up to progressBar
+    interval = setInterval(CountUp, (48));
+    //wait 1s to allow for progress bar to grow
+    //before showing popups
+    setTimeout(ShowAlert, 1000);
     function ShowAlert() {
       StopCount();
       setShowAlert((prevState) => !prevState);
     }
-    if (snap.startProgress) {
-      // setProgress(
-      //   prevState => prevState + (100 / 27)
-      // );
-      //if progress has started, increase progress bar
-      setProgressBar(100 / 6);
-      //!! call Counter function for the first time here
-      //!! count up to progressBar
-      interval = setInterval(CountUp, (48));
-      //wait 1s to allow for progress bar to grow
-      //before showing popups
-      setTimeout(ShowAlert, 1000);
-    }
-  }, [snap.startProgress])
+  }, [])
   //if the submit button has been clicked, then startProgress starts
   //therefore progressBar state increases and Alert becomes visible
 
@@ -68,6 +63,8 @@ function ProgressBar() {
     if (tempBatch.length === 0) {
       if (progressBar < 100) {
         setProgressBar((prev) => prev + (100 / 6));
+        // const newProgressBar = state.progressBar + (100 / 6);
+        // state.progressBar = newProgressBar;
         interval = setInterval(CountUp, (59));
         setTimeout(StopCount, 1000);
       }
@@ -114,11 +111,13 @@ function ProgressBar() {
       {/* <div style={{color: "white"}}>{count}</div> */}
       <div className="tracker">
         {/* width of progress div is equal to progressBar state as a percentage */}
+        <ErrorBoundary>
         <div className="progress" style={{ width: `${progressBar}%` }}>
           {/* !! display new count state here */}
           {/* {Math.round(progressBar)}% */}
           {count}%
         </div>
+        </ErrorBoundary>
       </div>
       {tempBatch.map(text => <ErrorBoundary><Alert
         index={tempBatch.indexOf(text)}
