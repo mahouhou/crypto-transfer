@@ -9,14 +9,14 @@ const alertBatch = [2, 4, 3, 12, 6];
 
 function ProgressBar() {
   const [count, setCount] = useState(0);
-  //count starts at 0
+  //counter displayed on ProgressBar
   const [batchNumber, setBatchNumber] = useState(0);
-  //batch number state starts at 0 - the first item in alertBatch[]
+  //batch number state starts at 0 for the first item in alertBatch[]
   const [showAlert, setShowAlert] = useState(false);
   //showAlert state is initially set to false i.e. not visible
-  //setShowAlert is used to make Alert visible
+  //setShowAlert is used to make Alert visible/invisible
   const snap = useSnapshot(state);
-  //set Valtio state
+  //set Valtio state (contains startProgress and showForm)
   const [tempBatch, setTempBatch] = useState([-1]);
   //tempBatch state starts with an array containing -1 (not 0)
   //state updated during the useEffect - every time batchNumber changes
@@ -27,9 +27,14 @@ function ProgressBar() {
   let interval = null;
   function CountUp() {setCount((prev) => prev + 1);}
   function StopCount() {clearInterval(interval);}
+  // function SetFirstProgress() {
+  //   setProgressBar((prev) => prev + (100 / 6));
+  // }
 
   useEffect(() => {
+    console.log({tempBatch1: `${tempBatch}`}); //-1
     //if progress has started, increase progress bar
+    // requestAnimationFrame(SetFirstProgress);
     setProgressBar((prev) => prev + (100 / 6));
     //!! call Counter function for the first time here
     //!! count up to progressBar
@@ -39,36 +44,35 @@ function ProgressBar() {
     setTimeout(ShowAlert, 1000);
     function ShowAlert() {
       StopCount();
+      console.log({showAlert1: `${showAlert}`}); //false
       setShowAlert((prevState) => !prevState);
+      console.log({showAlert2: `${showAlert}`}); //false -> why not true ??
+      console.log({tempBatch3: `${tempBatch}`}); //-1
     }
-  }, [])
+    //tempBatch = -1
+  }, [snap.startProgress])
   //if the submit button has been clicked, then startProgress starts
   //therefore progressBar state increases and Alert becomes visible
 
   function handleAlert() {
   //function called by x button on alerts
-    // setProgress(
-    //   prevState => prevState + (100 / 27)
-    //   //progress increases by closing alerts
-    // )
     let temp = [...tempBatch];
     //copy contents of tempBatch into temp
     temp.pop();
     //pop() method removes the last item (closed alert batch data) from array
     setTempBatch(temp)
+    //tempBatch = alert data
   }
 
   useEffect(() => {
     //progress bar increases with each new alert batch
+    console.log({tempBatch2: `${tempBatch}`}); //-1 -> why is this the second console.log to get logged when tempBatch doesn't change ??
     if (tempBatch.length === 0) {
       if (progressBar < 100) {
         setProgressBar((prev) => prev + (100 / 6));
-        // const newProgressBar = state.progressBar + (100 / 6);
-        // state.progressBar = newProgressBar;
         interval = setInterval(CountUp, (59));
         setTimeout(StopCount, 1000);
       }
-      // setProgressBar(progress);
       if (batchNumber < 5) {
         setBatchNumber((prev) => prev + 1);
       }
@@ -90,7 +94,6 @@ function ProgressBar() {
         //push data in sequence and increment x
         //until all items from that batch have been pushed to temp
         temp.push(data[batchNumber][x])
-        // console.log(data[batchNumber][x]);
         x++
       };
       //tempBatch state is updated with batch data
@@ -108,13 +111,10 @@ function ProgressBar() {
 
   return (
     <div className="tracker-wrap">
-      {/* <div style={{color: "white"}}>{count}</div> */}
       <div className="tracker">
         {/* width of progress div is equal to progressBar state as a percentage */}
         <ErrorBoundary>
         <div className="progress" style={{ width: `${progressBar}%` }}>
-          {/* !! display new count state here */}
-          {/* {Math.round(progressBar)}% */}
           {count}%
         </div>
         </ErrorBoundary>
@@ -134,37 +134,6 @@ function ProgressBar() {
 }
 
 export default ProgressBar;
-
-// SEQUENCE OF POP UPS
-
-// Sequence 1.
-// At 10% progress
-// Show 2 pop ups
-// Close last pop up and progress moves 10%
-
-// Sequence 2.
-// At 20% progress
-// Show 4 pop ups
-// Close last pop up and progress moves 5%
-
-// Sequence 3.
-// At 25% progress
-// Show 3 pop ups
-// Close last pop up and progress moves 5%
-
-// Sequence 4.
-// At 30% progress
-// Show 12 pop ups
-// Close last pop up and progress moves 40%
-
-// Sequence 5.
-// At 70% progress
-// Show 6 pop ups
-// Close last pop up and progress moves 30%
-
-// Closing sequence.
-// At 100% progress
-// Play some kind of animation
 
 // const data = [
 //   ["Melting", "I'm"],
