@@ -15,8 +15,6 @@ function App() {
   return (
     <div className="App">
       <ErrorBoundary>
-      {/* {state.progressBar >= 100 ?
-        <Video /> : <Main />} */}
         <Main />
         {/* <main>
           <div className="banner">

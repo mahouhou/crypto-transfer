@@ -1,5 +1,5 @@
 import TransferForm from './TransferForm';
-import ProgressBar from './ProgressBar';
+import ProgressBarNew from './ProgressBarNew';
 import Intro from './Intro';
 import { useSnapshot } from 'valtio';
 import state from '../State';
@@ -19,7 +19,7 @@ function Main() {
             <ErrorBoundary>
             <div className="transfer-wrap">
                 {state.startProgress ?
-                    <ErrorBoundary><ProgressBar /></ErrorBoundary> : (state.showForm ?
+                    <ErrorBoundary><ProgressBarNew /></ErrorBoundary> : (state.showForm ?
                         <ErrorBoundary><TransferForm /></ErrorBoundary> : <Intro />) }
             </div>
             </ErrorBoundary>
