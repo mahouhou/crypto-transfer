@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import ReactPlayer from 'react-player/vimeo';
 import ErrorBoundary from "./ErrorBoundary";
+import CoolEarth from "./svg/CoolEarth";
 // import {default as CoolEarth} from '%PUBLIC_URL%/logo-cool-earth-white.svg';
-import {ReactComponent as CoolEarth} from './logo-cool-earth-white.svg';
+// import {ReactComponent as CoolEarth} from './logo-cool-earth-white.svg';
 // import CoolEarth from '../assets/images/logo-cool-earth-white.svg';
 
 const Video = () => {
