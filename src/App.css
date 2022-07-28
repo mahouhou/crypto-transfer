@@ -20,7 +20,7 @@ main {
 
 /* Border Styles */
 
-.transfer-wrap, .banner {
+.transfer-wrap, .banner, .end-message {
     border: outset 4px gray;
     background-color: gray;
 }
@@ -185,6 +185,17 @@ img {
     /* width = 100 / (9 / 16) = 177.777777 */
     width: 177.78vh;
   }
+}
+
+/* End Message */
+
+.end-message {
+    z-index: 1000;
+    position: absolute;
+    width: 40%;
+    background-image: url(./assets/images/coolearth-thumb.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
 

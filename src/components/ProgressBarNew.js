@@ -12,7 +12,7 @@ function ProgressBarNew() {
     const [showAlert, setShowAlert] = useState(false);
     //setShowAlert is used to make Alert visible
     const snap = useSnapshot(state);
-    //set Valtio state (contains startProgress and showForm)
+    //set Valtio state (contains startProgress, showForm, progressFinished)
     const [tempBatch, setTempBatch] = useState([0]);
     //tempBatch state starts with an array containing 0
     //state updated during the useEffect - every time batchNumber changes
@@ -29,7 +29,7 @@ function ProgressBarNew() {
       clearInterval(interval);
     }
 
-    //every time tempBatch.length = 0 (Alerts are been closed)
+    //every time tempBatch.length = 0 (Alerts are closed)
     //progressBar state is increased, count starts and stops
     //and batchNumber moves on to the next
     useEffect(() => {
@@ -41,6 +41,9 @@ function ProgressBarNew() {
             }
             if (batchNumber < 5) {
               setBatchNumber((prev) => prev + 1);
+            }
+            if (progressBar >= 100) {
+                state.progressFinished = true;
             }
           }
     }, [snap.startProgress, tempBatch])
@@ -101,7 +104,6 @@ function ProgressBarNew() {
           ))}
         </div>
       );
-
 }
 
 export default ProgressBarNew;
@@ -111,9 +113,18 @@ const alertBatch = [2, 4, 3, 12, 6];
 
 //Alert data
 const data = [
-    ["melting-02.png", "I'm-01.png"],
-    ["HORROR-04.png", "THE-03.png", "horror-02.png", "the-01.png"],
-    ["PEFECT-03.png", "nobodie's-02.png", "Well-01.png"],
+    ["melting-02.png",
+    "I'm-01.png"
+    ],
+    ["HORROR-04.png",
+    "THE-03.png",
+    "horror-02.png",
+    "the-01.png"
+    ],
+    ["PEFECT-03.png",
+    "nobodie's-02.png",
+    "Well-01.png"
+    ],
     [
       "you-12.png",
       "to-11.png",
@@ -135,5 +146,5 @@ const data = [
       "tommoro-03.png",
       "all-02.png",
       "After-01.png",
-    ],
+    ]
   ];
