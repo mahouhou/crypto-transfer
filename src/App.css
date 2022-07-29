@@ -13,6 +13,11 @@ body {
     width: 100vw;
 }
 
+.App {
+    align-items: center;
+    justify-content: center;
+}
+
 main {
     width: 80vw;
     margin: 0 10vw;
@@ -32,7 +37,7 @@ main {
 }
 
 .alert {
-    border: outset 4px black;
+    border: outset 4px gray;
     background-color: black;
     color: white;
 }
@@ -190,12 +195,47 @@ img {
 /* End Message */
 
 .end-message {
-    z-index: 1000;
+    z-index: 100;
     position: absolute;
     width: 40%;
+    min-height: 45vh;
     background-image: url(./assets/images/coolearth-thumb.jpg);
     background-position: center;
     background-size: cover;
+    color: white;
+}
+
+.end-message::after {
+    position: absolute;
+    content:"";
+    height:100%;
+    width:100%;
+    top:0;
+    left:0;
+    z-index: 110;
+    background: linear-gradient(to bottom, rgba(255,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+}
+
+.message-wrap {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 16px;
+    min-height: 45vh;
+    z-index: 120;
+    position: absolute;
+    box-sizing: border-box;
+}
+
+svg#coolearth-logo {
+    fill: white;
+    width: 40%;
+}
+
+.donate-message {
+    width: 60%;
+    padding-left: 16px;
 }
 
 

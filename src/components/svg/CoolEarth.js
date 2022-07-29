@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 function CoolEarth() {
   return (
     //@ts-ignore
-    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <svg version="1.1" id="coolearth-logo" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
          viewBox="0 0 95 90" style={{enableBackground:'new 0 0 95 90'}} xmlSpace="preserve">
 
     <path className="st0" d="M94.4,28.2v7.1c0,0.1-0.1,0.2-0.2,0.2H76.5c-0.1,0-0.2-0.1-0.2-0.1V1.1c0-0.2,0.1-0.3,0.2-0.3h7
@@ -41,7 +41,7 @@ function CoolEarth() {
         c0,2.7-1.2,3.5-2.4,3.5h-0.4c-0.1,0-0.2-0.1-0.2-0.2V43.7c0-0.1,0.1-0.2,0.2-0.2h1.1c1.2,0,1.7,1.3,1.7,3.6L49.2,57.9L49.2,57.9z"/>
     </svg>
     
-  )
-}
+  );
+};
 
-export default CoolEarth
+export default CoolEarth;

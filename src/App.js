@@ -10,10 +10,9 @@ function App() {
   const snap = useSnapshot(state);
   //set Valtio state (contains startProgress, showForm, progressFinished)
   return (
-    <div className="App">
+    <div className="App" style={state.progressFinished ? {display: "flex", height: "100vh"} : {display: "block"}}>
       <ErrorBoundary>
-        {/* {state.progressFinished ? <Video /> : <Main />} */}
-        <Video />
+        {state.progressFinished ? <Video /> : <Main />}
       </ErrorBoundary>
     </div>
   );

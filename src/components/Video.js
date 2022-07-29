@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import ReactPlayer from 'react-player/vimeo';
 import ErrorBoundary from "./ErrorBoundary";
 import CoolEarth from "./svg/CoolEarth";
-// import {default as CoolEarth} from '%PUBLIC_URL%/logo-cool-earth-white.svg';
-// import {ReactComponent as CoolEarth} from './logo-cool-earth-white.svg';
-// import CoolEarth from '../assets/images/logo-cool-earth-white.svg';
 
 const Video = () => {
     const [videoEnded, setVideoEnded] = useState(false);
@@ -17,17 +14,18 @@ const Video = () => {
         <>
         <ErrorBoundary>
         <div className="end-message" style={videoEnded ? {display: "block"} : {display: "none"}}>
-            {/* <svg><CoolEarth /></svg> */}
-            <ErrorBoundary>
-                <CoolEarth />
-            {/* <img src={CoolEarth} alt="Cool Earth" /> */}
-            {/* {console.log("../assets/images/logo-cool-earth-white.svg")} */}
-            </ErrorBoundary>
-            <h1>Here is a message!</h1>
-            <button className="button">Donate</button>
+            <div className="message-wrap">
+                <ErrorBoundary>
+                    <CoolEarth />
+                </ErrorBoundary>
+                <div className="donate-message">
+                    <p>There's still time left. Indigenous peoples and local communities are fighting for climate justice. Join them.</p>
+                    <button className="button" href="https://www.coolearth.org/donate/">Donate</button>
+                </div>
+            </div>
         </div>
         </ErrorBoundary>
-        <div className="video-background">
+        <div className="video-background" style={videoEnded ? {display: "none"} : {display: "block"}}>
             <ReactPlayer
                 url="https://player.vimeo.com/video/728786848?h=6c4f02223e"
                 enablejsapi={1}
