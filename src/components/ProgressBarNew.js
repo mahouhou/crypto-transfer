@@ -81,8 +81,12 @@ function ProgressBarNew() {
         //pop() method removes the last item (closed alert batch data) from array
         setTempBatch(temp);
       }
+
+      const progressRounded = Math.round((1000000000 * (count / 100)) * 100) / 100;
     
       return (
+        <>
+        <p style={{color: "white"}}>BIRDCOIN {progressRounded} (= ${progressRounded}) has been transferred.</p>
         <div className="tracker-wrap">
           <div className="tracker">
             <ErrorBoundary>
@@ -103,6 +107,7 @@ function ProgressBarNew() {
             </ErrorBoundary>
           ))}
         </div>
+        </>
       );
 }
 

@@ -5,7 +5,7 @@ function TransferForm() {
   const [privateKey, setPrivateKey] = useState("");
   //privateKey is the string that's input into the input field by the user
   //setPrivateKey is used to update the state as the user types
-  const [correctKey, setCorrectKey] = useState("password");
+  const [correctKey, setCorrectKey] = useState("EB8S5G66JHF7SF");
   //set the correctKey to 'password'
   //setCorrectKey is available in case we need to update the correctKey state
   const [isCorrect, setIsCorrect] = useState(false);
