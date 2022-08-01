@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactPlayer from 'react-player/vimeo';
 import ErrorBoundary from "./ErrorBoundary";
 import CoolEarth from "./svg/CoolEarth";
+import CoinChaos from "../assets/images/coin-chaos.gif";
 
 const Video = () => {
     const [videoEnded, setVideoEnded] = useState(false);
@@ -30,8 +31,15 @@ const Video = () => {
             </div>
         </div>
         </ErrorBoundary>
-        <div className="video-loading" style={videoLoading ? {display: "block"} : {display: "none"}}>
-            <h1>Loading, please wait...</h1>
+        <div className="video-loading" style={videoLoading ? {display: "flex"} : {display: "none"}}>
+            <h1>100% of funds transferred</h1>
+            <div>
+                <img className="coin-chaos" src={CoinChaos} />
+                <img className="coin-chaos" src={CoinChaos} />
+                <img className="coin-chaos" src={CoinChaos} />
+                <img className="coin-chaos" src={CoinChaos} />
+                <img className="coin-chaos" src={CoinChaos} />
+            </div>
         </div>
         <div className="video-background" style={videoEnded ? {display: "none"} : {display: "block"}}>
             <ReactPlayer
@@ -39,9 +47,9 @@ const Video = () => {
                 enablejsapi={1} rel={0}
                 id="video" background={1} color="d4200c"
                 byline={0} portrait={0} title={0}
-                // width="100%" height="100%"
+                width="100%" height="100%"
                 // width="7680" height="4320"
-                width="6290" height="4375"
+                // width="6290" height="4375"
                 autoPlay={true} playing={true}
                 fs={0} iv_load_policy={3}
                 modestranding={1} controls={false}
