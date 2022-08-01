@@ -13,7 +13,6 @@ function App() {
     <div className="App" style={state.progressFinished ? {display: "flex", height: "100vh"} : {display: "block"}}>
       <ErrorBoundary>
         {state.progressFinished ? <Video /> : <Main />}
-        {/* <Video /> */}
       </ErrorBoundary>
     </div>
   );

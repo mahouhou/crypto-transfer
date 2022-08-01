@@ -40,6 +40,7 @@ const Video = () => {
                 <img className="coin-chaos" src={CoinChaos} />
                 <img className="coin-chaos" src={CoinChaos} />
             </div>
+            <h2>Loading, please wait...</h2>
         </div>
         <div className="video-background" style={videoEnded ? {display: "none"} : {display: "block"}}>
             <ReactPlayer
