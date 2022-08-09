@@ -10,7 +10,7 @@ function Alert(props) {
                   top: `${props.index * 10}`+'px'
                 }}>
     {/* toggle visibility based on status state */}
-      <button onClick={props.handleAlert}>X</button>
+      <button onClick={props.handleAlert}>x</button>
       {/* calls handleAlert which increases progress */}
       <ErrorBoundary>
       <img src={`/alert-copy/${props.src}`} alt={props.text} />

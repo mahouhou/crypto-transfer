@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import state from '../State';
+import SligoilTickWhite from "./svg/SligoilTickWhite";
 
 function TransferForm() {
   const [privateKey, setPrivateKey] = useState("");
@@ -37,6 +38,7 @@ function TransferForm() {
   }
   return (
     <div className="form-wrap">
+      <img id="big-coin" src={require("../assets/images/coin-spin-300.gif")} />
       <form>
           <label for="recipient">Recipient:</label>
           <input
@@ -45,6 +47,7 @@ function TransferForm() {
             type="text"
             disabled
            />
+           <SligoilTickWhite /><br />
           <label for="currency">Currency:</label>
           <input
             id="currency"
@@ -52,16 +55,19 @@ function TransferForm() {
             type="text"
             disabled
            />
+           <SligoilTickWhite /><br />
           <label for="password">Wallet Key:</label>
           <input
+            autofocus
             id="password"
-            placeholder="Input private key.."
-            type="password"
+            placeholder="EB8S5G66......"
+            type="text"
             onChange={handleChange}
             //calls handleChange when there's user input
             value={privateKey}
           /><br />
           <input
+          id="transfer-now"
             type="submit"
             value="Transfer Now"
             onClick={handleSubmit}
@@ -70,7 +76,7 @@ function TransferForm() {
             //submit button is disabled until isCorrect is true ?
           />
       </form>
-      <img src={require("../assets/images/coin-spin.gif")} />
+      <img id="big-coin" src={require("../assets/images/coin-spin-300.gif")} />
       {/* {isCorrect && privateKey} */}
     </div>
   );
