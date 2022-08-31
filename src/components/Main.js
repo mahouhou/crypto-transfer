@@ -11,10 +11,12 @@ function Main() {
     return (
         <main>
             <aside className="banner">
-                <img id="sligoil-ad" src={require("../assets/images/sligoil-banner.gif")} alt="Sligoil: Your Power Is In Our Hands" />
+                <img id="sligoil-ad" src={require("../assets/images/sligoil-banner-2.gif")} alt="Sligoil: Your Power Is In Our Hands" />
             </aside>
             <header className="banner" id="title" >
+                <h1>
                 <img src={require("../assets/images/crypto-transfer-title.gif")} alt="crypto-transfer" />
+                </h1>
             </header>
             <ErrorBoundary>
             <div className="transfer-wrap">
@@ -35,7 +37,7 @@ function Main() {
             </div>
             </ErrorBoundary>
             <aside className="banner">
-                <img src={require("../assets/images/vox-ad.gif")} alt="You Are Being Watched" />
+                <img src={require("../assets/images/vox-ad-2.gif")} alt="You Are Being Watched" />
             </aside>
          </main>
     )

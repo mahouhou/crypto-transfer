@@ -14,13 +14,13 @@ function TransferForm() {
   //setIsCorrect state is updated to true if privateKey is equal to correctKey
 
   useEffect(() => {
-    if (correctKey === privateKey) {
+    if (correctKey === privateKey.toUpperCase()) {
       setIsCorrect(true)
     }
     else {
       setIsCorrect(false)
     }
-  },[privateKey])
+  },[privateKey, correctKey])
     //array of dependance, the things that the useEffect depends on
     //when anything inside the array changes, the useEffect runs
     //in this case, the useEffect has to keep an eye on privateKey to check if it changes ?
@@ -38,7 +38,7 @@ function TransferForm() {
   }
   return (
     <div className="form-wrap">
-      <img id="big-coin" src={require("../assets/images/coin-spin-300.gif")} />
+      <img id="big-coin" src={require("../assets/images/coin-spin-300.gif")} alt="" />
       <form>
           <label for="recipient">Recipient:</label>
           <input
@@ -58,7 +58,7 @@ function TransferForm() {
            <SligoilTickWhite /><br />
           <label for="password">Wallet Key:</label>
           <input
-            autofocus
+            autoFocus
             id="password"
             placeholder="EB8S5G66......"
             type="text"
@@ -69,14 +69,14 @@ function TransferForm() {
           <input
           id="transfer-now"
             type="submit"
-            value="Transfer Now"
+            value="Transfer NOW"
             onClick={handleSubmit}
             //calls handleSubmit when submit button is clicked
             disabled={!isCorrect}
             //submit button is disabled until isCorrect is true ?
           />
       </form>
-      <img id="big-coin" src={require("../assets/images/coin-spin-300.gif")} />
+      <img id="big-coin" src={require("../assets/images/coin-spin-300.gif")} alt="" />
       {/* {isCorrect && privateKey} */}
     </div>
   );

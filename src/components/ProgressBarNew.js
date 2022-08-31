@@ -85,29 +85,30 @@ function ProgressBarNew() {
       const progressRounded = Math.round((1000000000 * (count / 100)) * 100) / 100;
     
       return (
-        <>
-        <p style={{color: "white"}}>BIRDCOIN {progressRounded} (= ${progressRounded}) has been transferred.</p>
-        <div className="tracker-wrap">
-          <div className="tracker">
-            <ErrorBoundary>
-              <div className="progress" style={{ width: `${progressBar}%` }}>
-                {count >= 100 ? 100 : count}%
-              </div>
-            </ErrorBoundary>
+        <section className="progress-wrap">
+          {tempBatch != 0 && <div className="overlay" />}
+          <p className="transfer-total">BIRDCOIN {progressRounded} has been transferred.</p>
+          <div className="tracker-wrap">
+            <div className="tracker">
+              <ErrorBoundary>
+                <div className="progress" style={{ width: `${progressBar}%` }}>
+                  <span>{count >= 100 ? 100 : count}{count > 0 && "%"}</span>
+                </div>
+              </ErrorBoundary>
+            </div>
+            {tempBatch.map((text) => (
+              <ErrorBoundary>
+                <Alert
+                  index={tempBatch.indexOf(text)}
+                  status={`${showAlert ? "block" : "none"}`}
+                  handleAlert={handleAlert}
+                  src={text}
+                  key={text}
+                />
+              </ErrorBoundary>
+            ))}
           </div>
-          {tempBatch.map((text) => (
-            <ErrorBoundary>
-              <Alert
-                index={tempBatch.indexOf(text)}
-                status={`${showAlert ? "block" : "none"}`}
-                handleAlert={handleAlert}
-                src={text}
-                key={text}
-              />
-            </ErrorBoundary>
-          ))}
-        </div>
-        </>
+        </section>
       );
 }
 

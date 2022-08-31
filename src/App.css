@@ -1,3 +1,8 @@
+:root {
+    --vertical-margin-transfer: 2rem;
+    --vertical-margin-main: 10vw;
+}
+
 html {
     position: fixed;
     overflow: hidden;
@@ -12,11 +17,13 @@ body {
     font-family: 'Millimeter-Reg';
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    word-break: break-word;
 }
 
 body::before{
     content: "";
-    background-image: url(./assets/images/Number-Map_matrix3end_12fps.gif);
+    /* background-image: url(./assets/images/Number-Map_matrix3end_12fps.gif); */
+    background-image: url(./assets/images/raining-numbers-2.gif);
     background-position: center;
     height: 100vh;
     width: 100vw;
@@ -33,8 +40,11 @@ body::before{
 
 main {
     width: 80vw;
-    margin: 0 10vw;
+    margin: 0 var(--vertical-margin-main);
 }
+
+body {cursor: url(./assets/images/Cell-Phone.png), auto !important;}
+/* a, button {cursor: url(./assets/images/phone-ring.png), pointer !important} */
 
 /* Typography */
 
@@ -55,11 +65,25 @@ main {
 }
 
 @font-face {
+    font-family: Mister-Pixel-Reg;
+    src:    url('./assets/fonts/MisterPixel/MisterPixelRegular.otf') format('opentype'),
+            url('./assets/fonts/MisterPixel/misterpixelregular-webfont.eot') format('embedded-opentype'),
+            url('./assets/fonts/MisterPixel/MisterPixelRegular.woff') format('woff'),
+            url('./assets/fonts/MisterPixel/MisterPixelRegular.ttf') format('truetype');
+}
+
+@font-face {
     font-family: Sligoil;
-    src: url(https://sligoil.com/wp-content/themes/shuttle-icorporate/fonts/SligoilMMRegular.otf) format('opentype');
+    src:    url('./assets/fonts/Sligoil/Sligoil-Micro.woff') format('woff'),
+            url('./assets/fonts/Sligoil/Sligoil-Micro.woff2') format('woff2'),
+            url('./assets/fonts/Sligoil/SligoilMM-Regular.otf') format('opentype');
 }
 
 h1, h2, h3 {margin: 0 0 1em;}
+
+@media screen and (max-width: 640px) {
+    body {font-size: 16px;}
+}
 
 /* Banners */
 
@@ -81,14 +105,12 @@ aside.banner #sligoil-ad {max-height: 175px}
     mask-image: radial-gradient(circle, black 50%, rgba(0, 0, 0, 0.3) 65%);
 }
 
-
 /* Intro Section */
 
 .intro {
     color: white;
     text-align: center;
     padding: 1rem;
-    margin: 0 2rem;
     position: relative;
     border-style: solid;
     border-width: 20px 0px 20px 0px;
@@ -102,11 +124,21 @@ aside.banner #sligoil-ad {max-height: 175px}
     -webkit-border-image: url(./assets/images/coin-spin-64.gif) 20 20 20 20 round round;
     -o-border-image: url(./assets/images/coin-spin-64.gif) 20 20 20 20 round round;
     border-image: url(./assets/images/coin-spin-64.gif) 20 20 20 20 round round; */
+}
 
+@media not all and (min-resolution:.001dpcm) { 
+    .intro {border-width: 50px 0px 50px 0px !important;}
 }
 
 @media screen and (min-width: 840px) {
-    .intro {line-height: 1.5;}
+    .intro {
+        line-height: 1.5;
+        margin: 0 var(--vertical-margin-transfer);
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .intro {padding: 0.5rem 0 0;}
 }
 
 .intro ul {padding: 0}
@@ -134,23 +166,12 @@ aside.banner #sligoil-ad {max-height: 175px}
     padding: 1.5rem 1rem 1rem;
 }
 
-/* Border Styles */
-
-.end-message {
-    border: outset 3px blue;
-    background-color: gray;
-}
+/* Error Message */
 
 .error-msg {
     color: red;
     padding: 1rem;
     text-align: center;
-}
-
-.alert {
-    border: outset 4px white;
-    background-color: blue;
-    color: black;
 }
 
 /* Transfer Form Section */
@@ -173,6 +194,10 @@ aside.banner #sligoil-ad {max-height: 175px}
     text-align: center;
 }
 
+@media screen and (max-width: 640px) {
+    .form-wrap {padding: 0}
+}
+
 form, .form-wrap img {width: 100%;}
 
 @media screen and (min-width: 1310px) {
@@ -186,10 +211,7 @@ label {
     width: 25%;
     box-sizing: border-box;
     text-align: left;
-    /* word-break: break-word; */
 }
-
-/* input[type="submit"] {margin-left: 25%;} */
 
 input:not(#transfer-now) {margin-bottom: 1rem;}
 #transfer-now {margin-top: 1rem;}
@@ -243,10 +265,8 @@ svg#sligoil-tick {
 
 /* Progress Bar */
 
-.tracker-wrap {
-    position: relative;
-    height: 200px;
-    top: calc((200px - 30px) / 2);
+.progress-wrap {
+    margin: 4rem 0;
 }
 
 .tracker {
@@ -257,7 +277,7 @@ svg#sligoil-tick {
 
 .tracker,
 .progress {
-    height: 30px;
+    height: 3rem;
     border-radius: 50px;
 }
 
@@ -266,17 +286,34 @@ svg#sligoil-tick {
     background-image: linear-gradient(rgb(255, 255, 255) 0%, rgb(212, 32, 12) 31%);
     color: white;
     text-align: center;
-    line-height: 30px;
+    line-height: 3rem;
     transition: width linear 1s;
+}
+
+.progress span {
+    font-family: 'Mister-Pixel-Reg';
+    font-size: 1.5rem;
+}
+
+@media screen and (min-width: 840px) {
+    .progress span {font-size: 2.2rem;}
+}
+
+.transfer-total {
+    color: white;
 }
 
 /* Alert */
 
 .alert {
     position: absolute;
-    width: 150px;
-    max-width: calc(100% - (55% + 10vw));
+    width: 300px;
+    max-width: calc(100% - (55% + var(--vertical-margin-main)));
     box-sizing: border-box;
+    border: outset 4px white;
+    background-color: blue;
+    color: black;
+    z-index: 100;
 }
 
 .alert button {
@@ -284,6 +321,8 @@ svg#sligoil-tick {
     float: right;
     background-image: linear-gradient(rgb(229, 228, 228) 0%, rgb(161, 161, 161) 31%);
     border: solid 1px gray;
+    font-family: 'Mister-Pixel-Reg';
+    font-size: 1.4rem;
 }
 
 .alert button:hover,
@@ -293,6 +332,18 @@ svg#sligoil-tick {
 
 .alert img {
     border-top: outset 4px white;
+    width: 100%;
+    display: block;
+}
+
+.overlay {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 90;
+    left: 0;
+    top: 0;
 }
 
 /* Video */
@@ -304,7 +355,7 @@ svg#sligoil-tick {
   height: 100vh;
 }
 
-.video-background #video {
+.video-background .video {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -317,13 +368,13 @@ svg#sligoil-tick {
 }
 
 @media (min-aspect-ratio: 16/9) {
-  .video-background #video {
+  .video-background .video {
     /* height = 100 * (9 / 16) = 56.25 */
     height: 56.25vw;
   }
 }
 @media (max-aspect-ratio: 16/9) {
-  .video-background #video {
+  .video-background .video {
     /* width = 100 / (9 / 16) = 177.777777 */
     width: 177.78vh;
   }
@@ -341,6 +392,8 @@ svg#sligoil-tick {
     background-position: center;
     background-size: cover;
     color: white;
+    border: outset 3px gray;
+    background-color: gray;
 }
 
 .end-message::after {
@@ -376,6 +429,11 @@ svg#coolearth-logo {
     padding-left: 16px;
 }
 
+.donate-message p {
+    font-family: "Sligoil";
+    line-height: 1;
+}
+
 /* Loading Screen */
 
 .video-loading {
@@ -396,3 +454,14 @@ svg#coolearth-logo {
     display: inline-block;
 }
 
+.video-loading aside {
+    border: solid 3px gray;
+    background-color: blue;
+}
+
+.video-loading .frame {
+    margin-top: 2rem;
+    border-top: solid 3px gray;
+    padding: 2rem 1rem 1rem;
+    background-color: black;
+}

@@ -6,8 +6,8 @@ function Alert(props) {
     <>
     <div  className="alert"
           style={{display: `${props.status}`,
-                  left: `${props.index * 5}`+'%',
-                  top: `${props.index * 10}`+'px'
+                  left: `${1 + (props.index * 5.7)}`+'%',
+                  top: `${1 + (props.index * 5.3)}`+'vh'
                 }}>
     {/* toggle visibility based on status state */}
       <button onClick={props.handleAlert}>x</button>
