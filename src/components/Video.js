@@ -52,38 +52,41 @@ const Video = () => {
                 </div>
             </aside>
         </div>
-        <div className="video-background" style={videoEnded ? {display: "none"} : {display: "block"}}>
-            <ReactPlayer
-                url={ isSafari ? "https://player.vimeo.com/video/728786848?h=6c4f02223e" :
-                [   {src: "video/End-Game-Cut-Scene.mp4", type: "video/mp4"},
-                    {src: "video/End-Game-Cut-Scene.webm", type: "video/webm"}]
-                }
-                className="video"
-                width="100%" height="100%"
-                playing={true} controls={true}
-                onEnded={onEnded}
-                onReady={videoLoaded}
-                onError={onError}
+        {!videoEnded && 
+        <div className="video-background">
+        <ReactPlayer
+            url={ isSafari ? "https://player.vimeo.com/video/728786848?h=6c4f02223e" :
+            [   {src: "video/End-Game-Cut-Scene.mp4", type: "video/mp4"},
+                {src: "video/End-Game-Cut-Scene-Lolores.webm", type: "video/webm"}]
+            }
+            className="video"
+            width="100%" height="100%"
+            playing={true} controls={true}
+            onEnded={onEnded}
+            onBufferEnd={videoLoaded}
+            onLoaded={ isSafari ? videoLoaded : null }
+            onError={onError}
 
-                config={{
-                    vimeo: {
-                        playerOptions: {
-                            background: 1,
-                            color: "d4200c",
-                            byline: 0,
-                            portrait: 0,
-                            title: 0
-                        }
+            config={{
+                vimeo: {
+                    playerOptions: {
+                        background: 1,
+                        color: "d4200c",
+                        byline: 0,
+                        portrait: 0,
+                        title: 0
                     }
-                }}
+                }
+            }}
 
-                // enablejsapi={1} rel={0}
-                // forcevideo="true"
-                // fs={0} iv_load_policy={3}
-                // modestranding={1}
-                
-            />
-        </div>
+            // enablejsapi={1} rel={0}
+            // forcevideo="true"
+            // fs={0} iv_load_policy={3}
+            // modestranding={1}
+            
+        />
+    </div>
+        }
         </>
     )
 }
