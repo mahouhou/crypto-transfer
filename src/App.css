@@ -23,7 +23,7 @@ body {
 body::before{
     content: "";
     /* background-image: url(./assets/images/Number-Map_matrix3end_12fps.gif); */
-    background-image: url(./assets/images/raining-numbers-2.gif);
+    background-image: url(./assets/images/raining-numbers-end.gif);
     background-position: center;
     height: 100vh;
     width: 100vw;
@@ -79,7 +79,7 @@ body {cursor: url(./assets/images/Cell-Phone.png), auto !important;}
             url('./assets/fonts/Sligoil/SligoilMM-Regular.otf') format('opentype');
 }
 
-h1, h2, h3 {margin: 0 0 1em;}
+h1:not(#title h1), h2, h3 {margin: 0 0 1em;}
 
 @media screen and (max-width: 640px) {
     body {font-size: 16px;}
@@ -101,9 +101,9 @@ aside.banner {
 
 aside.banner #sligoil-ad {max-height: 175px}
 
-#title {
+/* #title {
     mask-image: radial-gradient(circle, black 50%, rgba(0, 0, 0, 0.3) 65%);
-}
+} */
 
 /* Intro Section */
 

@@ -15,7 +15,7 @@ function Main() {
             </aside>
             <header className="banner" id="title" >
                 <h1>
-                <img src={require("../assets/images/crypto-transfer-title.gif")} alt="crypto-transfer" />
+                <img src={require("../assets/images/crypto-transfer-logo-texture.gif")} alt="crypto-transfer" />
                 </h1>
             </header>
             <ErrorBoundary>

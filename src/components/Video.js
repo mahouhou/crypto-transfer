@@ -55,13 +55,12 @@ const Video = () => {
         <div className="video-background" style={videoEnded ? {display: "none"} : {display: "block"}}>
             <ReactPlayer
                 url={ isSafari ? "https://player.vimeo.com/video/728786848?h=6c4f02223e" :
-                [   {src: "video/End-Game-Cut-Scene.webm", type: "video/webm"},
-                    {src: "video/End-Game-Cut-Scene.mp4", type: "video/mp4"}]
+                [   {src: "video/End-Game-Cut-Scene.mp4", type: "video/mp4"},
+                    {src: "video/End-Game-Cut-Scene.webm", type: "video/webm"}]
                 }
                 className="video"
                 width="100%" height="100%"
                 playing={true} controls={true}
-                muted={true} autoPlay={true} 
                 onEnded={onEnded}
                 onReady={videoLoaded}
                 onError={onError}
