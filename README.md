@@ -1,3 +1,25 @@
+This application was designed as part of the video game:
+Unknown Number, by Godolphin Games: [View on Steam](https://store.steampowered.com/app/1692340/Unknown_Number_A_First_Person_Talker/)
+
+The website [crypto-transfer.co.uk](http://crypto-transfer.co.uk/) is displayed inside of the game via an in-game browser. You will need a passcode, obtained during the game, to view the whole experience.
+
+While developers may find some useful code in here, this project was published to Github primarily as part of the portfolio of designer & developer, Freja Smith.
+
+This project was built using Create React App and includes:
+* Valtio State Management
+* React Player that plays webm, mp4 and Vimeo video sources
+* Loading screen for video player
+* React Device Detect
+* A custom progress bar with % counter
+* SVG as JS components
+
+Plus some fun CSS rules including:
+* border-image
+* custom image as cursor
+* mix-blend-mode
+* linear-gradient as background
+* CSS global variables
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

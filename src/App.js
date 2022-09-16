@@ -1,34 +1,26 @@
-import './App.css';
-import TransferForm from './components/TransferForm';
-import ProgressBar from './components/ProgressBar';
-import Intro from './components/Intro';
-import { useSnapshot } from 'valtio';
-import state from './State';
-import ErrorBoundary from './components/ErrorBoundary';
+import React from "react";
+import { useSnapshot } from "valtio";
+import state from "./State";
+import "./App.css";
+import ErrorBoundary from "./components/ErrorBoundary";
+import Main from "./components/Main";
+import Video from "./components/Video";
 
 function App() {
   const snap = useSnapshot(state);
-
+  //set Valtio state (contains startProgress, showForm, progressFinished)
   return (
-    <div className="App">
-      <div className="banner">
-        <img src={require("./assets/images/sligoil-banner.gif")} />
-      </div>
-      <div className="banner">
-        <img src={require("./assets/images/crypto-transfer-title.gif")} />
-      </div>
+    <div
+      className="App"
+      style={
+        state.progressFinished
+          ? { display: "flex", height: "100vh" }
+          : { display: "block" }
+      }
+    >
       <ErrorBoundary>
-      <div className="transfer-wrap">
-        {state.startProgress ?
-          <ProgressBar /> :
-          (state.showForm ?
-            <ErrorBoundary><TransferForm /></ErrorBoundary> : 
-            <Intro />) }
-      </div>
+        {state.progressFinished ? <Video /> : <Main />}
       </ErrorBoundary>
-      <div className="banner">
-        <img src={require("./assets/images/vox-ad.gif")} />
-      </div>
     </div>
   );
 }

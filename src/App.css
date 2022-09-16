@@ -1,3 +1,8 @@
+:root {
+    --vertical-margin-transfer: 2rem;
+    --vertical-margin-main: 10vw;
+}
+
 html {
     position: fixed;
     overflow: hidden;
@@ -5,41 +10,167 @@ html {
 
 body {
     background-color: black;
-    background-image: url(./assets/images/Number-Map_matrix3end_12fps.gif);
+    height: 100vh;
+    font-size: 18px;
+    overflow-y: scroll;
+    width: 100vw;
+    font-family: 'Millimeter-Reg';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    word-break: break-word;
+}
+
+body::before{
+    content: "";
+    /* background-image: url(./assets/images/Number-Map_matrix3end_12fps.gif); */
+    background-image: url(./assets/images/raining-numbers-end.gif);
+    background-size: 480px;
     background-position: center;
     height: 100vh;
-    font-size: 16px;
-    overflow-y: scroll;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: -10;
 }
 
 .App {
-    width: 80vw;
-    margin: 0 10vw;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Border Styles */
+main {
+    width: 80vw;
+    margin: 0 var(--vertical-margin-main);
+}
 
-.transfer-wrap, .banner {
-    border: outset 4px gray;
+body {cursor: url(./assets/images/Cell-Phone.png), auto !important;}
+
+/* Typography */
+
+@font-face {
+    font-family: Anthony;
+    src:    url('./assets/fonts/Anthony/Anthony.eot') format('embedded-opentype'),
+            url('./assets/fonts/Anthony/Anthony.woff') format('woff'),
+            url('./assets/fonts/Anthony/Anthony.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: Millimeter-Reg;
+    src:    url('./assets/fonts/Millimeter/Millimetre-Regular_web.eot') format('embedded-opentype'),
+            url('./assets/fonts/Millimeter/Millimetre-Regular_web.otf') format('opentype'),
+            url('./assets/fonts/Millimeter/Millimetre-Regular_web.ttf') format('truetype'),
+            url('./assets/fonts/Millimeter/Millimetre-Regular_web.woff') format('woff'),
+            url('./assets/fonts/Millimeter/Millimetre-Regular_web.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: Mister-Pixel-Reg;
+    src:    url('./assets/fonts/MisterPixel/MisterPixelRegular.otf') format('opentype'),
+            url('./assets/fonts/MisterPixel/misterpixelregular-webfont.eot') format('embedded-opentype'),
+            url('./assets/fonts/MisterPixel/MisterPixelRegular.woff') format('woff'),
+            url('./assets/fonts/MisterPixel/MisterPixelRegular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Sligoil;
+    src:    url('./assets/fonts/Sligoil/Sligoil-Micro.woff') format('woff'),
+            url('./assets/fonts/Sligoil/Sligoil-Micro.woff2') format('woff2'),
+            url('./assets/fonts/Sligoil/SligoilMM-Regular.otf') format('opentype');
+}
+
+h1:not(#title h1), h2, h3 {margin: 0 0 1em;}
+
+@media screen and (max-width: 640px) {
+    body {font-size: 16px;}
+}
+
+/* Banners */
+
+.banner img {
+    width: 100%;
+    display: block;
+}
+
+.banner {margin: 1rem 0;}
+
+aside.banner {
+    border: outset 3px gray;
     background-color: gray;
 }
 
-.error-msg {
-    color: red;
-    padding: 1rem;
-    text-align: center;
-}
+aside.banner #sligoil-ad {max-height: 175px}
 
-.alert {
-    border: outset 4px black;
-    background-color: black;
-    color: white;
+#title img {
+    mix-blend-mode: lighten;
 }
 
 /* Intro Section */
 
 .intro {
     color: white;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    border-style: solid;
+    border-width: 20px 0px 20px 0px;
+    -moz-border-image: url(./assets/images/coin-spin-64.gif) 64 0 64 0 round round;
+    -webkit-border-image: url(./assets/images/coin-spin-64.gif) 64 0 64 0 round round;
+    -o-border-image: url(./assets/images/coin-spin-64.gif) 64 0 64 0 round round;
+    border-image: url(./assets/images/coin-spin-64.gif) 64 0 64 0 round round;
+    /* border-style: solid;
+    border-width: 20px 20px 20px 20px;
+    -moz-border-image: url(./assets/images/coin-spin-64.gif) 20 20 20 20 round round;
+    -webkit-border-image: url(./assets/images/coin-spin-64.gif) 20 20 20 20 round round;
+    -o-border-image: url(./assets/images/coin-spin-64.gif) 20 20 20 20 round round;
+    border-image: url(./assets/images/coin-spin-64.gif) 20 20 20 20 round round; */
+}
+
+@media not all and (min-resolution:.001dpcm) { 
+    .intro {border-width: 50px 0px 50px 0px !important;}
+}
+
+@media screen and (min-width: 840px) {
+    .intro {
+        line-height: 1.5;
+        margin: 0 var(--vertical-margin-transfer);
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .intro {padding: 0.5rem 0 0;}
+}
+
+.intro ul {padding: 0}
+
+.intro li {list-style-type: none;}
+
+.intro li:before,
+.intro li:after {
+    content: "\263A";
+    width: 1em;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5em;
+}
+
+.scam:before,
+.scam:after {
+    content: "\2620" !important;
+}
+
+/* New Transfer Section */
+
+.new-transfer {
+    text-align: center;
+    padding: 1.5rem 1rem 1rem;
+}
+
+/* Error Message */
+
+.error-msg {
+    color: red;
+    padding: 1rem;
     text-align: center;
 }
 
@@ -49,23 +180,29 @@ body {
     background-image: url(./assets/images/blue-liquid.gif);
     background-size: cover;
     background-position: bottom;
-}
-
-.transfer-wrap, .alert {
-    padding: 1rem;
+    padding: 2rem 1rem 1rem;
     margin-bottom: 1rem;
+    border: outset 3px grey;
+    background-color: blue;
 }
 
 .form-wrap {
     display: flex;
     align-items: center;
     flex-direction: column-reverse;
+    padding: 2rem;
+    text-align: center;
+}
+
+@media screen and (max-width: 640px) {
+    .form-wrap {padding: 0}
 }
 
 form, .form-wrap img {width: 100%;}
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1310px) {
     .form-wrap {flex-direction: row;}
+    form {padding-top: 4rem;}
 }
 
 label {
@@ -73,19 +210,27 @@ label {
     margin-right: 0.5rem;
     width: 25%;
     box-sizing: border-box;
+    text-align: left;
 }
 
-input {margin-bottom: 1rem;}
+input:not(#transfer-now) {margin-bottom: 1rem;}
+#transfer-now {margin-top: 1rem;}
 
-input[type="password"],
 input[type="text"] {
     border-radius: 0;
-    width: calc(75% - 0.5rem);
+    width: calc(75% - 0.5rem - 1.5rem);
     box-sizing: border-box;
+    height: 2em;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 1rem;
+    padding: 0.2em 0.5em;
+    border: none;
 }
 
 input[type="submit"],
-input[type="text"],
+input[type="text"]:not(#password),
 label,
 .button {color: white;}
 
@@ -96,19 +241,37 @@ input[type="submit"],
     padding: 0.75em 2em;
     border-radius: 50px;
     cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2rem;
+    font-family: 'Anthony';
+    font-weight: bold;
 }
 
-input[disabled] {
+input[type="submit"][disabled] {
     opacity: 0.7;
     cursor: not-allowed;
 }
 
+svg#sligoil-tick {
+    fill: white;
+    width: 1rem;
+    margin-left: 0.5rem;
+}
+
+#big-coin {max-width: 300px}
+
+.bad-key {
+    color: red;
+    margin: 0 0 0 25%;
+    text-align: left;
+    padding-left: 0.5em;
+}
+
 /* Progress Bar */
 
-.tracker-wrap {
-    position: relative;
-    height: 200px;
-    top: calc((200px - 30px) / 2);
+.progress-wrap {
+    margin: 4rem 0;
 }
 
 .tracker {
@@ -119,7 +282,7 @@ input[disabled] {
 
 .tracker,
 .progress {
-    height: 30px;
+    height: 3rem;
     border-radius: 50px;
 }
 
@@ -128,29 +291,183 @@ input[disabled] {
     background-image: linear-gradient(rgb(255, 255, 255) 0%, rgb(212, 32, 12) 31%);
     color: white;
     text-align: center;
-    line-height: 30px;
+    line-height: 3rem;
     transition: width linear 1s;
+}
+
+.progress span {
+    font-family: 'Mister-Pixel-Reg';
+    font-size: 1.5rem;
+}
+
+@media screen and (min-width: 840px) {
+    .progress span {font-size: 2.2rem;}
+}
+
+.transfer-total {
+    color: white;
 }
 
 /* Alert */
 
 .alert {
     position: absolute;
-    width: 150px;
-    max-width: calc(100% - (55% + 10vw));
+    width: 300px;
+    max-width: calc(100% - (55% + var(--vertical-margin-main)));
     box-sizing: border-box;
+    border: outset 4px white;
+    background-color: blue;
+    color: black;
+    z-index: 100;
 }
 
 .alert button {
     display: block;
     float: right;
+    background-image: linear-gradient(rgb(229, 228, 228) 0%, rgb(161, 161, 161) 31%);
+    border: solid 1px gray;
+    font-family: 'Mister-Pixel-Reg';
+    font-size: 1.4rem;
 }
 
-/* Banners */
+.alert button:hover,
+.alert button:active {
+    background-image: linear-gradient(rgb(161, 161, 161) 0%, rgb(190, 190, 190) 31%);
+}
 
-img {
+.alert img {
+    border-top: outset 4px white;
     width: 100%;
     display: block;
 }
 
-.banner {margin: 1rem 0;}
+.overlay {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 90;
+    left: 0;
+    top: 0;
+}
+
+/* Video */
+
+.video-background {
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+.video-background .video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  background-image: url(./assets/images/trees-background0.png);
+  background-size: cover;
+  background-position: center;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .video-background .video {
+    /* height = 100 * (9 / 16) = 56.25 */
+    height: 56.25vw;
+  }
+}
+@media (max-aspect-ratio: 16/9) {
+  .video-background .video {
+    /* width = 100 / (9 / 16) = 177.777777 */
+    width: 177.78vh;
+  }
+}
+
+/* End Message */
+
+.end-message {
+    z-index: 100;
+    position: absolute;
+    width: 550px;
+    max-width: calc(100% - 32px);
+    min-height: 350px;
+    background-image: url(./assets/images/coolearth-thumb.jpg);
+    background-position: center;
+    background-size: cover;
+    color: white;
+    border: outset 3px gray;
+    background-color: gray;
+}
+
+.end-message::after {
+    position: absolute;
+    content:"";
+    height:100%;
+    width:100%;
+    top:0;
+    left:0;
+    z-index: 110;
+    background: linear-gradient(to bottom, rgba(255,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+}
+
+.message-wrap {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 16px;
+    min-height: 350px;
+    z-index: 120;
+    position: absolute;
+    box-sizing: border-box;
+}
+
+svg#coolearth-logo {
+    fill: white;
+    width: 40%;
+}
+
+.donate-message {
+    width: 60%;
+    padding-left: 16px;
+}
+
+.donate-message p {
+    font-family: "Sligoil";
+    line-height: 1;
+}
+
+/* Loading Screen */
+
+.video-loading {
+    position: absolute;
+    z-index: 90;
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+    color: white;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.coin-chaos {
+    width: 100px;
+    max-width: 20%;
+    display: inline-block;
+}
+
+.video-loading aside {
+    border: solid 3px gray;
+    background-color: blue;
+}
+
+.video-loading .frame {
+    margin-top: 2rem;
+    border-top: solid 3px gray;
+    padding: 2rem 1rem 1rem;
+    background-color: black;
+}
